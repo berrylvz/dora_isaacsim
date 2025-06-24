@@ -28,7 +28,7 @@ conda activate dora_isaacsim
 pip install -r requirements.txt
 ```
 
-8. Install necessary packages into isaacsim
+7. Install necessary packages into isaacsim
 
 ```shell
 <path of isaacsim>/python.sh -m pip install omegaconf==2.3.0 \
@@ -70,7 +70,7 @@ Click on the Stage > /World/franka and press `F`.
 See `./assets/dora_isaacsim_act.mp4`.
 
 
-1. Close the dora-rs
+5. Close the dora-rs
 
 ```shell
 dora destroy
