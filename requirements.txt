@@ -1,0 +1,17 @@
+# ACT alg
+torchvision
+torch
+pyquaternion
+pyyaml
+pexpect
+opencv-python
+matplotlib
+einops
+packaging
+ipython
+h5py
+
+hydra-core>=1.1.0
+
+# dora-rs
+dora-rs-cli==0.3.11

@@ -1,0 +1,41 @@
+nodes:
+  - id: sim_isaacsim
+    build: pip install -e ../node-hub/sim_isaacsim
+    path: ../node-hub/sim_isaacsim/sim_isaacsim/main.py
+    env:
+      ISAAC_PYTHON_PATH: "/home/lv/isaacsim/python.sh"
+      CONFIG_NAME: "stack_cube_act"
+    inputs:
+      request_camera: policy_act/request_camera
+      request_joint_pos: policy_act/request_joint_pos
+      action: policy_act/action
+    outputs:
+      - camera
+      - joint_pos
+  
+  - id: policy_act
+    build: pip install -e ../node-hub/policy_act
+    path: ../node-hub/policy_act/policy_act/main.py
+    args: 
+      --task_name stack_cube
+      --ckpt_dir ../node-hub/policy_act/policy_act/assets/ckpt/
+      --policy_class ACT
+      --kl_weight 10
+      --chunk_size 20
+      --hidden_dim 512
+      --batch_size 8
+      --dim_feedforward 3200
+      --num_epochs 2000
+      --lr 1e-5
+      --seed 0
+      --temporal_agg
+      # --eval
+    inputs: 
+      camera: sim_isaacsim/camera
+      joint_pos: sim_isaacsim/joint_pos
+    outputs:
+      - request_camera
+      - request_joint_pos
+      - action
+    env:
+      SCENARIO: sim
